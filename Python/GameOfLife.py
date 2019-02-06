@@ -9,17 +9,19 @@ GREEN = (  0, 255,   0)
 RED =   (255,   0,   0)
 GRAY =  (100,100,100)
 
-width = 500
-height = 500
-N = 10
-cellSize = int(width/N)
+width = 1000
+height = 700
+N = 20
+cellSizeX = int(width/N)
+cellSizeY = int(height/N)
 
-cell = numpy.zeros((cellSize,cellSize), dtype = numpy.int)
-secCell = numpy.zeros((cellSize,cellSize), dtype = numpy.int)
+cell = numpy.zeros((cellSizeX,cellSizeY), dtype = numpy.int)
+secCell = numpy.zeros((cellSizeX,cellSizeY), dtype = numpy.int)
 for x in range (0,width,N):
     for y in range (0,height,N):
         cell[int(x/N)][int(y/N)]= randint(0,1)
-        
+
+
 def findNeighbors(cell, x, y):
     temp = numpy.copy(cell)
     if 0 < x < len(temp) - 1:
@@ -78,19 +80,19 @@ done = False;
 clock = pygame.time.Clock()
 
 while not done:
-    clock.tick(30)
+    clock.tick(10)
     for event in pygame.event.get(): # User did something
         if event.type == pygame.QUIT: # If user clicked close
             done=True # Flag that we are done so we exit this loop
 
     clear()
-    for x in range(0,cellSize):
-        for y in range(0,cellSize):
+    for x in range(0,cellSizeX):
+        for y in range(0,cellSizeY):
             secCell[x][y] = updateCell(cell,x,y)
 
     cell = numpy.copy(secCell)
-    for x in range (0, cellSize,1):
-        for y in range (0,cellSize,1):
+    for x in range (0, cellSizeX,1):
+        for y in range (0,cellSizeY,1):
             if cell[x][y] == 1:
                 pygame.draw.rect(screen, BLACK, [x*N,y*N,width,height])
             else:
