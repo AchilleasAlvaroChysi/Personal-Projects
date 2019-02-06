@@ -1,6 +1,6 @@
 import pygame, sys, math, time, numpy, math
 from random import randint
-from math import pi
+
 
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
